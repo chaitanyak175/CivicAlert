@@ -9,4 +9,6 @@ class AssetsConstants {
   static const String homeIconFilled = '$_iconsSvgPath/homeFilled.svg';
   static const String eyeIconOpen = '$_iconsSvgPath/eyeIconOpen.png';
   static const String eyeIconCloed = '$_iconsSvgPath/eyeIconClosed.png';
+  static const String forwardArrow = '$_iconsSvgPath/forwardArrow.svg';
+  static const String backwardArrow = '$_iconsSvgPath/backwardArrow.svg';
 }
