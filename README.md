@@ -1,4 +1,4 @@
-# civicalert
+# CivicAlert
 
 A new Flutter project.
 
