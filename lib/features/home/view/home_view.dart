@@ -1,5 +1,5 @@
 import 'package:civicalert/constants/ui_constants.dart';
-import 'package:civicalert/features/complain/views/create_complain_view.dart';
+import 'package:civicalert/features/complain/view/create_complain_view.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
