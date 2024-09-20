@@ -2,7 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:civicalert/constants/appwrite_constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final appwriteClient = Provider((ref) {
+final appwriteClientProvider = Provider((ref) {
   Client client = Client();
   return client
       .setEndpoint(AppwriteConstants.endPoint)
@@ -11,6 +11,11 @@ final appwriteClient = Provider((ref) {
 });
 
 final appwriteAccountProvider = Provider((ref) {
-  final client = ref.watch(appwriteClient);
+  final client = ref.watch(appwriteClientProvider);
   return Account(client);
+});
+
+final appwriteDatabaseProvider = Provider((ref) {
+  final client = ref.watch(appwriteClientProvider);
+  return Databases(client);
 });

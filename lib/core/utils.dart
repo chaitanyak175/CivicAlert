@@ -4,11 +4,17 @@ import 'package:flutter/material.dart';
 void showSnackBar(BuildContext context, String content) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      content: Text(
-        content,
-        style: const TextStyle(color: Colors.black),
+      content: Center(
+        child: Text(
+          content,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
-      backgroundColor: Pallete.backgroundColor,
+      backgroundColor: Pallete.scaffoldMessengerColor,
     ),
   );
+}
+
+String getNameFromEmail(String email) {
+  return email.split('@')[0];
 }

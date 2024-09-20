@@ -89,7 +89,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Login now and your journey of being a better Civic.',
+                  'Login now and start your journey of being a better Civic.',
                   style: GoogleFonts.poppins(),
                 ),
               ),

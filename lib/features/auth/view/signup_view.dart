@@ -90,7 +90,7 @@ class _SignupViewState extends ConsumerState<SignupView> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Sign up now and your journey of being a better Civic.',
+                  'Sign up now and start your journey of being a better Civic.',
                   style: GoogleFonts.poppins(),
                 ),
               ),
