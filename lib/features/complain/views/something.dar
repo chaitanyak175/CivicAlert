@@ -33,15 +33,6 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
   }
 
   @override
-  void dispose() {
-    titleController.dispose();
-    descriptionController.dispose();
-    locationController.dispose();
-    contactController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Pallete.coinswtichColor,
@@ -114,7 +105,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                         ],
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 10,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +132,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                           TextField(
                             controller: descriptionController,
                             maxLength: 200,
-                            maxLines: 6,
+                            maxLines: 5,
                             onChanged: (value) {
                               setState(() {});
                             },
@@ -150,7 +141,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                             },
                             decoration: const InputDecoration(
                               hintText:
-                                  'Provide a detailed description of the issue',
+                                  'Enter a brief Description for the complaint',
                               hintStyle: TextStyle(
                                 fontFamily: 'Gilroy',
                               ),
@@ -170,7 +161,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                         ],
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 10,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,7 +217,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                         ],
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 10,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,7 +282,6 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 10),
         decoration: const BoxDecoration(
-          color: Pallete.backgroundColor,
           border: Border(
             top: BorderSide(
               color: Pallete.selectionColor,

@@ -43,6 +43,7 @@ dependencies:
   google_fonts: ^6.2.1
   loading_animation_widget: ^1.2.1
   logger: ^2.4.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +88,10 @@ flutter:
     - family: Mulish
       fonts:
         - asset: assets/fonts/Mulish-Regular.ttf
+
+    - family: Clash
+      fonts:
+        - asset: assets/fonts/ClashGrotesk-Regular.otf
 
     - family: Gilroy
       fonts:
