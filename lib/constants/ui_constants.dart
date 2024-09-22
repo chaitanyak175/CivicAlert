@@ -37,6 +37,13 @@ class UiConstants {
 
   static AppBar createComplainAppBar() {
     return AppBar(
+      shape: const Border(
+        bottom: BorderSide(
+          color: Pallete.selectionColor,
+          width: 0.3,
+        ),
+      ),
+      scrolledUnderElevation: 0.0,
       backgroundColor: Pallete.backgroundColor,
       automaticallyImplyLeading: false,
       title: const Row(

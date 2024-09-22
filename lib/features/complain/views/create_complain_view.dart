@@ -2,6 +2,7 @@ import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/features/complain/widgets/create_complain_button.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateComplainView extends ConsumerStatefulWidget {
@@ -88,7 +89,10 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                             maxLength: 50,
                             maxLines: 2,
                             onChanged: (value) {
-                              setState(() {});
+                              SchedulerBinding.instance
+                                  .addPostFrameCallback((_) {
+                                setState(() {});
+                              });
                             },
                             onTapOutside: (PointerDownEvent event) {
                               FocusManager.instance.primaryFocus?.unfocus();
@@ -141,9 +145,12 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                           TextField(
                             controller: descriptionController,
                             maxLength: 200,
-                            maxLines: 6,
+                            maxLines: 5,
                             onChanged: (value) {
-                              setState(() {});
+                              SchedulerBinding.instance
+                                  .addPostFrameCallback((_) {
+                                setState(() {});
+                              });
                             },
                             onTapOutside: (PointerDownEvent event) {
                               FocusManager.instance.primaryFocus?.unfocus();
@@ -200,7 +207,10 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                             maxLength: 100,
                             maxLines: 3,
                             onChanged: (value) {
-                              setState(() {});
+                              SchedulerBinding.instance
+                                  .addPostFrameCallback((_) {
+                                setState(() {});
+                              });
                             },
                             onTapOutside: (PointerDownEvent event) {
                               FocusManager.instance.primaryFocus?.unfocus();
@@ -255,7 +265,10 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                             maxLength: 10,
                             maxLines: 1,
                             onChanged: (value) {
-                              setState(() {});
+                              SchedulerBinding.instance
+                                  .addPostFrameCallback((_) {
+                                setState(() {});
+                              });
                             },
                             onTapOutside: (PointerDownEvent event) {
                               FocusManager.instance.primaryFocus?.unfocus();

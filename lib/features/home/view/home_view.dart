@@ -1,4 +1,5 @@
 import 'package:civicalert/constants/ui_constants.dart';
+import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/complain/views/create_complain_view.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,6 +27,19 @@ class _HomeViewState extends State<HomeView> {
 
   void onCreateComplain() {
     Navigator.push(context, CreateComplainView.route());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _requestLocationPermission();
+  }
+
+  Future<void> _requestLocationPermission() async {
+    final permissionGranted = await requestLocationPermission();
+    if (mounted && !permissionGranted) {
+      showLocationPermissionSnackBar(context);
+    }
   }
 
   @override
