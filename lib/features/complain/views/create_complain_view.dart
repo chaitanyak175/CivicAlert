@@ -4,6 +4,7 @@ import 'package:civicalert/common/loading_page.dart';
 import 'package:civicalert/constants/assets_constants.dart';
 import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/core/utils.dart';
+import 'package:civicalert/features/complain/widgets/carouselView.dart';
 import 'package:civicalert/features/complain/widgets/create_complain_button.dart';
 import 'package:civicalert/features/complain/widgets/custom_painter.dart';
 import 'package:civicalert/theme/pallete.dart';
@@ -36,8 +37,10 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
   List<File> images = [];
 
   void onPickImages() async {
-    images = await pickImages();
-    setState(() {});
+    List<File> newImages = await pickImages();
+    setState(() {
+      images.addAll(newImages);
+    });
   }
 
   Widget _buildCounter(int currentLength, int maxLength) {
@@ -373,42 +376,8 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                           ),
                           GestureDetector(
                             onTap: onPickImages,
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 2),
-                              color: Pallete.backgroundColor,
-                              child: CustomPaint(
-                                painter: DashedBorderPainter(),
-                                child: Container(
-                                  width: 350,
-                                  height: 200,
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      // Image.asset(AssetsConstants.imagePickerpng),
-                                      SvgPicture.asset(
-                                        height: 60,
-                                        AssetsConstants.imagePicker,
-                                        colorFilter: const ColorFilter.mode(
-                                          Pallete.buttonColor,
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                                      const Text(
-                                        'Select Images to Upload',
-                                        style: TextStyle(
-                                          fontFamily: 'Gilroy',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400,
-                                          letterSpacing: 1,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child:
+                                buildImageUploadSection(images, onPickImages),
                           ),
                         ],
                       ),
