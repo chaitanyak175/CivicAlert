@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:civicalert/common/loading_page.dart';
+import 'package:civicalert/constants/assets_constants.dart';
 import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/complain/widgets/create_complain_button.dart';
+import 'package:civicalert/features/complain/widgets/custom_painter.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -28,6 +33,12 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
   GoogleMapController? mapController;
   Position? _currentPosition;
   String? _locationString;
+  List<File> images = [];
+
+  void onPickImages() async {
+    images = await pickImages();
+    setState(() {});
+  }
 
   Widget _buildCounter(int currentLength, int maxLength) {
     return Text(
@@ -338,6 +349,65 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                                 ),
                               ),
                               counterText: '',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Upload Photos',
+                            style: TextStyle(
+                              fontFamily: 'Gilroy',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            onTap: onPickImages,
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
+                              color: Pallete.backgroundColor,
+                              child: CustomPaint(
+                                painter: DashedBorderPainter(),
+                                child: Container(
+                                  width: 350,
+                                  height: 200,
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Image.asset(AssetsConstants.imagePickerpng),
+                                      SvgPicture.asset(
+                                        height: 60,
+                                        AssetsConstants.imagePicker,
+                                        colorFilter: const ColorFilter.mode(
+                                          Pallete.buttonColor,
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                      const Text(
+                                        'Select Images to Upload',
+                                        style: TextStyle(
+                                          fontFamily: 'Gilroy',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],
