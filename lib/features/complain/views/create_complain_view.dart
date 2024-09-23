@@ -1,9 +1,13 @@
+import 'package:civicalert/common/loading_page.dart';
 import 'package:civicalert/constants/ui_constants.dart';
+import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/complain/widgets/create_complain_button.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CreateComplainView extends ConsumerStatefulWidget {
   static route() =>
@@ -21,6 +25,10 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
   final locationController = TextEditingController();
   final contactController = TextEditingController();
 
+  GoogleMapController? mapController;
+  Position? _currentPosition;
+  String? _locationString;
+
   Widget _buildCounter(int currentLength, int maxLength) {
     return Text(
       '${maxLength - currentLength}',
@@ -31,6 +39,47 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
         fontSize: 13,
       ),
     );
+  }
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        locationSettings:
+            const LocationSettings(accuracy: LocationAccuracy.best),
+      );
+      if (mounted) {
+        setState(() {
+          _currentPosition = position;
+          _locationString = '${position.latitude},${position.longitude}';
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        showLocationErrorSnackBar(context);
+        setState(() {
+          _locationString = 'Location not available';
+        });
+      }
+    }
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  Future<void> _initializeLocation() async {
+    bool hasPermission = await requestLocationPermission();
+    if (hasPermission) {
+      await _getCurrentLocation();
+    } else if (mounted) {
+      showLocationPermissionSnackBar(context);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeLocation();
   }
 
   @override
@@ -291,6 +340,55 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                               counterText: '',
                             ),
                           ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Your Current Location',
+                            style: TextStyle(
+                              fontFamily: 'Gilroy',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          if (_currentPosition != null)
+                            SizedBox(
+                              height: 200,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: GoogleMap(
+                                  onMapCreated: _onMapCreated,
+                                  initialCameraPosition: CameraPosition(
+                                    target: LatLng(_currentPosition!.latitude,
+                                        _currentPosition!.longitude),
+                                    zoom: 17,
+                                  ),
+                                  markers: {
+                                    Marker(
+                                      markerId:
+                                          const MarkerId('current_location'),
+                                      position: LatLng(
+                                          _currentPosition!.latitude,
+                                          _currentPosition!.longitude),
+                                    ),
+                                  },
+                                ),
+                              ),
+                            )
+                          else
+                            const SizedBox(
+                              height: 200,
+                              child: Loader(),
+                            ),
                         ],
                       ),
                     ],

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -60,4 +61,23 @@ void showLocationPermissionSnackBar(BuildContext context) {
       backgroundColor: Pallete.scaffoldMessengerColor,
     ),
   );
+}
+
+void showLocationErrorSnackBar(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+      content: Center(
+        child: Text(
+          'Unable to get current location. Please try again.',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      backgroundColor: Pallete.scaffoldMessengerColor,
+    ),
+  );
+}
+
+LatLng stringToLatLng(String locationString) {
+  List<String> latLng = locationString.split(',');
+  return LatLng(double.parse(latLng[0]), double.parse(latLng[1]));
 }
