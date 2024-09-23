@@ -1,8 +1,6 @@
-import 'package:civicalert/constants/assets_constants.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CreateComplainButton extends StatelessWidget {
