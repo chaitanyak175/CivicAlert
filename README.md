@@ -68,7 +68,7 @@ flutter pub get
      - `profilePic` (string)
      - `mobileNo` (string)
      - `isVerified` (boolean)
-   - Update the `AppwriteService` class in your project with the correct Appwrite project and endpoint information:
+   - Update the `AppwriteConstants` class in your project with the correct Appwrite project and endpoint information:
 
      ```dart
      class AppwriteConstants {
