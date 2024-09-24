@@ -1,5 +1,4 @@
 import 'package:civicalert/constants/appbar_constants.dart';
-import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
 import 'package:civicalert/features/auth/view/signup_view.dart';
 import 'package:civicalert/features/auth/widgets/email_textfield.dart';

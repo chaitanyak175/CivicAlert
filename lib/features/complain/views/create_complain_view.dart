@@ -2,17 +2,13 @@ import 'dart:io';
 
 import 'package:civicalert/common/loading_page.dart';
 import 'package:civicalert/constants/appbar_constants.dart';
-import 'package:civicalert/constants/assets_constants.dart';
-import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/core/utils.dart';
-import 'package:civicalert/features/complain/widgets/carouselView.dart';
+import 'package:civicalert/features/complain/widgets/carousel_view.dart';
 import 'package:civicalert/features/complain/widgets/create_complain_button.dart';
-import 'package:civicalert/features/complain/widgets/custom_painter.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 

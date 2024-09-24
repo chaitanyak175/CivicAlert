@@ -4,7 +4,6 @@ import 'package:civicalert/core/failure.dart';
 import 'package:civicalert/core/providers.dart';
 import 'package:civicalert/core/type_defs.dart';
 import 'package:civicalert/models/user_model.dart';
-import 'package:flutter/material.dart';
 import 'package:appwrite/models.dart' as model;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';

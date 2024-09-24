@@ -3,7 +3,6 @@ import 'package:appwrite/models.dart' as model;
 import 'package:civicalert/core/failure.dart';
 import 'package:civicalert/core/providers.dart';
 import 'package:civicalert/core/type_defs.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -97,7 +96,7 @@ class AuthApi extends IAuthApi {
   Future<model.User?> currentUserAccount() async {
     try {
       return await _account.get();
-    } on AppwriteException catch (e) {
+    } on AppwriteException {
       return null;
     } catch (e) {
       return null;
