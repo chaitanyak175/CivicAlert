@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:civicalert/common/loading_page.dart';
+import 'package:civicalert/constants/appbar_constants.dart';
 import 'package:civicalert/constants/assets_constants.dart';
 import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/core/utils.dart';
@@ -109,7 +110,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Pallete.coinswtichColor,
-      appBar: UiConstants.createComplainAppBar(),
+      appBar: AppbarConstants.raiseComplainAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

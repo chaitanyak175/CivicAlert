@@ -1,3 +1,4 @@
+import 'package:civicalert/constants/appbar_constants.dart';
 import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/complain/views/create_complain_view.dart';
@@ -16,7 +17,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int _page = 0;
-  final appbar = UiConstants.appbar();
+  final appbar = AppbarConstants.appbar();
 
   void onPageChange(int index) {
     setState(() {

@@ -1,3 +1,4 @@
+import 'package:civicalert/constants/appbar_constants.dart';
 import 'package:civicalert/constants/ui_constants.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
 import 'package:civicalert/features/auth/view/login_view.dart';
@@ -60,7 +61,7 @@ class _SignupViewState extends ConsumerState<SignupView> {
     final isLoading = ref.watch(authControllerProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: UiConstants.appbar(),
+      appBar: AppbarConstants.appbar(),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
