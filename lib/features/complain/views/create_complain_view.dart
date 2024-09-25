@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:civicalert/common/loading_page.dart';
 import 'package:civicalert/constants/appbar_constants.dart';
 import 'package:civicalert/core/utils.dart';
+import 'package:civicalert/features/auth/controller/auth_controller.dart';
+import 'package:civicalert/features/complain/controller/complain_controller.dart';
 import 'package:civicalert/features/complain/widgets/carousel_view.dart';
 import 'package:civicalert/features/complain/widgets/create_complain_button.dart';
 import 'package:civicalert/theme/pallete.dart';
@@ -32,6 +34,18 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
   Position? _currentPosition;
   String? _locationString;
   List<File> images = [];
+
+  void raiseComplain() {
+    ref.read(complainControllerProvider.notifier).shareComplain(
+          title: titleController.text,
+          description: descriptionController.text,
+          location: locationController.text,
+          contactNumber: contactController.text,
+          images: images,
+          currentLocation: _locationString!,
+          context: context,
+        );
+  }
 
   void onPickImages() async {
     List<File> newImages = await pickImages();
@@ -104,6 +118,21 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(currentUserDetailsProvider).when(
+      data: (user) {
+        debugPrint('User: ${user?.name}');
+        return user;
+      },
+      loading: () {
+        debugPrint('Loading user data...');
+        return null;
+      },
+      error: (err, stack) {
+        debugPrint('Error: $err');
+        return null;
+      },
+    );
+    final isLoading = ref.watch(complainControllerProvider);
     return Scaffold(
       backgroundColor: Pallete.coinswtichColor,
       appBar: AppbarConstants.raiseComplainAppBar(),
@@ -205,7 +234,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                           TextField(
                             controller: descriptionController,
                             maxLength: 200,
-                            maxLines: 5,
+                            maxLines: 6,
                             onChanged: (value) {
                               SchedulerBinding.instance
                                   .addPostFrameCallback((_) {
@@ -454,8 +483,8 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
           ),
           child: CreateComplainButton(
             buttonText: 'Complain',
-            onPressed: () {},
-            isLoading: false,
+            onPressed: raiseComplain,
+            isLoading: isLoading,
           ),
         ),
       ),

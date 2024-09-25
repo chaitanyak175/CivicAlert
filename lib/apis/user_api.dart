@@ -34,11 +34,11 @@ class UserApi extends IUserAPI {
       return right(null);
     } on AppwriteException catch (e, stackTrace) {
       return left(
-        Failure(message: e.toString(), stackTrace: stackTrace),
+        Failure(e.toString(), stackTrace),
       );
     } catch (e, stackTrace) {
       return left(
-        Failure(message: e.toString(), stackTrace: stackTrace),
+        Failure(e.toString(), stackTrace),
       );
     }
   }

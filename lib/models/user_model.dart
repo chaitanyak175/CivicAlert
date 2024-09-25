@@ -55,7 +55,7 @@ class UserModel {
       email: map['email'] ?? '',
       name: map['name'] ?? '',
       address: map['address'] ?? '',
-      uid: map['_id'] ?? '',
+      uid: map['\$id'] ?? '',
       profilePic: map['profilePic'] ?? '',
       mobileNo: map['mobileNo'] ?? '',
       isVerified: map['isVerified'] ?? false,

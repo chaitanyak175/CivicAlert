@@ -3,6 +3,7 @@ import 'package:appwrite/models.dart' as model;
 import 'package:civicalert/core/failure.dart';
 import 'package:civicalert/core/providers.dart';
 import 'package:civicalert/core/type_defs.dart';
+import 'package:civicalert/features/auth/controller/auth_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -43,16 +44,13 @@ class AuthApi extends IAuthApi {
         message = 'Invalid email or password format';
       }
       return left(
-        Failure(
-          message: message,
-          stackTrace: stackTrace,
-        ),
+        Failure(e.message ?? 'Some unexpected error occurred', stackTrace),
       );
     } catch (e, stackTrace) {
       return left(
         Failure(
-          message: e.toString(),
-          stackTrace: stackTrace,
+          e.toString(),
+          stackTrace,
         ),
       );
     }
@@ -78,15 +76,15 @@ class AuthApi extends IAuthApi {
       }
       return left(
         Failure(
-          message: message,
-          stackTrace: stackTrace,
+          message,
+          stackTrace,
         ),
       );
     } catch (e, stackTrace) {
       return left(
         Failure(
-          message: e.toString(),
-          stackTrace: stackTrace,
+          e.toString(),
+          stackTrace,
         ),
       );
     }
@@ -95,6 +93,7 @@ class AuthApi extends IAuthApi {
   @override
   Future<model.User?> currentUserAccount() async {
     try {
+      logger.d(_account.get());
       return await _account.get();
     } on AppwriteException {
       return null;

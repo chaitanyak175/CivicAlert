@@ -32,8 +32,11 @@ final currentUserDetailsProvider = FutureProvider((ref) {
   if (currentUser == null) {
     return null; // Or handle loading/error state
   }
+  logger.d(currentUser);
   final currentUserId = currentUser.$id;
+  logger.d(currentUserId);
   final userDetails = ref.watch(userDetailProvider(currentUserId));
+  logger.d(userDetails);
   return userDetails.value;
 });
 
@@ -44,6 +47,7 @@ final userDetailProvider = FutureProvider.family((ref, String uid) {
 
 final currentUserAccountProvider = FutureProvider((ref) {
   final authController = ref.watch(authControllerProvider.notifier);
+  logger.d(authController.currentUser());
   return authController.currentUser();
 });
 
@@ -113,7 +117,10 @@ class AuthController extends StateNotifier<bool> {
     );
   }
 
-  Future<model.User?> currentUser() => _authAPI.currentUserAccount();
+  Future<model.User?> currentUser() {
+    logger.d(_authAPI.currentUserAccount());
+    return _authAPI.currentUserAccount();
+  }
 
   Future<UserModel> getUserData(String uid) async {
     final document = await _userAPI.getUserData(uid);
