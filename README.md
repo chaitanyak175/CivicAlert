@@ -90,8 +90,10 @@ flutter pub get
        static const String projectId = 'YOUR_APPWRITE_PROJECT_ID';
        static const String endPoint = 'YOUR_APPWRITE_ENDPOINT';
 
-       static const String userCollections = 'YOUR_APPWRITE_COLLECTION_ID';
-       static const String userCollections = 'YOUR_COMPLAINT_COLLECTION_ID';
+       static const String userCollections = 'YOUR_USERS_COLLECTION_ID';
+       static const String complainCollections = 'YOUR_COMPLAINTS_COLLECTION_ID';
+
+       static const String imagesBucket = 'YOUR_IMAGES_BUCKET_ID';
      }
      ```
 
