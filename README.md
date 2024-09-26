@@ -68,6 +68,20 @@ flutter pub get
      - `profilePic` (string)
      - `mobileNo` (string)
      - `isVerified` (boolean)
+   - Create a new Appwrite collection called "complaints" with the following required attributes:
+     - `title` (string)
+     - `description` (string)
+     - `location` (string)
+     - `contactNumber` (string)
+     - `imageLinks` (Array of string)
+     - `uid` (string)
+     - `complainedAt` (int)
+     - `upvotes` (Array of string)
+     - `downvotes` (Array of string)
+     - `commentIds` (Array of string)
+     - `reshareCount` (int)
+     - `currentLocation` (string)
+   - Create a new Appwrite storage bucket called "images".
    - Update the `AppwriteConstants` class in your project with the correct Appwrite project and endpoint information:
 
      ```dart
@@ -77,6 +91,7 @@ flutter pub get
        static const String endPoint = 'YOUR_APPWRITE_ENDPOINT';
 
        static const String userCollections = 'YOUR_APPWRITE_COLLECTION_ID';
+       static const String userCollections = 'YOUR_COMPLAINT_COLLECTION_ID';
      }
      ```
 
