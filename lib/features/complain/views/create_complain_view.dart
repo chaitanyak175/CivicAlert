@@ -132,6 +132,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
         return null;
       },
     );
+    logger.d(currentUser);
     final isLoading = ref.watch(complainControllerProvider);
     return Scaffold(
       backgroundColor: Pallete.coinswtichColor,
@@ -177,6 +178,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                             controller: titleController,
                             maxLength: 50,
                             maxLines: 2,
+                            textCapitalization: TextCapitalization.sentences,
                             onChanged: (value) {
                               SchedulerBinding.instance
                                   .addPostFrameCallback((_) {
@@ -235,6 +237,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                             controller: descriptionController,
                             maxLength: 200,
                             maxLines: 6,
+                            textCapitalization: TextCapitalization.sentences,
                             onChanged: (value) {
                               SchedulerBinding.instance
                                   .addPostFrameCallback((_) {
@@ -295,6 +298,7 @@ class _CreateComplainViewState extends ConsumerState<CreateComplainView> {
                             keyboardType: TextInputType.streetAddress,
                             maxLength: 100,
                             maxLines: 3,
+                            textCapitalization: TextCapitalization.sentences,
                             onChanged: (value) {
                               SchedulerBinding.instance
                                   .addPostFrameCallback((_) {
