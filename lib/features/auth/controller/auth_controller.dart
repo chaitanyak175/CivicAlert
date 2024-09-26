@@ -45,10 +45,11 @@ final userDetailProvider = FutureProvider.family((ref, String uid) {
   return authController.getUserData(uid);
 });
 
-final currentUserAccountProvider = FutureProvider((ref) {
+final currentUserAccountProvider = FutureProvider((ref) async {
   final authController = ref.watch(authControllerProvider.notifier);
-  logger.d(authController.currentUser());
-  return authController.currentUser();
+  final user = await authController.currentUser(); // Await the result here.
+  logger.d(user); // Log the fetched user.
+  return user;
 });
 
 class AuthController extends StateNotifier<bool> {
@@ -117,9 +118,17 @@ class AuthController extends StateNotifier<bool> {
     );
   }
 
-  Future<model.User?> currentUser() {
-    logger.d(_authAPI.currentUserAccount());
-    return _authAPI.currentUserAccount();
+  Future<model.User?> currentUser() async {
+    try {
+      // Add 'await' here to ensure the future is awaited.
+      final user = await _authAPI.currentUserAccount();
+      logger.d(user);
+      return user;
+    } catch (e) {
+      // Handle error properly, maybe log or show some message.
+      logger.e("Error fetching current user: $e");
+      return null;
+    }
   }
 
   Future<UserModel> getUserData(String uid) async {

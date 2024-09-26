@@ -93,11 +93,15 @@ class AuthApi extends IAuthApi {
   @override
   Future<model.User?> currentUserAccount() async {
     try {
-      logger.d(_account.get());
-      return await _account.get();
-    } on AppwriteException {
+      // Make sure to await the API call properly.
+      final user = await _account.get();
+      logger.d(user);
+      return user;
+    } on AppwriteException catch (e) {
+      logger.e("AppwriteException: $e");
       return null;
     } catch (e) {
+      logger.e("Unexpected error: $e");
       return null;
     }
   }
