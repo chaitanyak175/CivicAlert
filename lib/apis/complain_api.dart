@@ -1,5 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
+import 'package:civicalert/constants/appbar_constants.dart';
 import 'package:civicalert/constants/appwrite_constants.dart';
 import 'package:civicalert/core/failure.dart';
 import 'package:civicalert/core/providers.dart';
@@ -14,6 +15,7 @@ final complainAPIProvider = Provider((ref) {
 
 abstract class IComplainAPI {
   FutureEither<Document> shareComplain(ComplainModel model);
+  Future<List<Document>> getComplains();
 }
 
 class ComplainAPI implements IComplainAPI {
@@ -43,5 +45,14 @@ class ComplainAPI implements IComplainAPI {
         ),
       );
     }
+  }
+
+  @override
+  Future<List<Document>> getComplains() async {
+    final documents = await _db.listDocuments(
+      databaseId: AppwriteConstants.databaseId,
+      collectionId: AppwriteConstants.complainCollections,
+    );
+    return documents.documents;
   }
 }

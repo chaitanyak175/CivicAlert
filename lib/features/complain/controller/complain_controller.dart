@@ -5,6 +5,7 @@ import 'package:civicalert/apis/storage_api.dart';
 import 'package:civicalert/core/failure.dart';
 import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
+import 'package:civicalert/features/complain/views/complain_successful.dart';
 import 'package:civicalert/models/complain_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +17,11 @@ final complainControllerProvider =
     complainAPI: ref.watch(complainAPIProvider),
     storageAPI: ref.watch(storageApiProvider),
   );
+});
+
+final getComplainProvider = FutureProvider((ref) {
+  final complainController = ref.watch(complainControllerProvider.notifier);
+  return complainController.getComplains();
 });
 
 class ComplainController extends StateNotifier<bool> {
@@ -30,6 +36,13 @@ class ComplainController extends StateNotifier<bool> {
         _complainAPI = complainAPI,
         _storageAPI = storageAPI,
         super(false);
+
+  Future<List<ComplainModel>> getComplains() async {
+    final complainList = await _complainAPI.getComplains();
+    return complainList
+        .map((complainModel) => ComplainModel.fromMap(complainModel.data))
+        .toList();
+  }
 
   void shareComplain({
     required String title,
@@ -98,6 +111,9 @@ class ComplainController extends StateNotifier<bool> {
     );
     final res = await _complainAPI.shareComplain(complain);
     state = false;
-    res.fold((l) => showSnackBar(context, l.message), (r) => null);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => Navigator.pushReplacement(context, ComplainSuccessful.route()),
+    );
   }
 }
