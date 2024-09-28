@@ -100,6 +100,10 @@ flutter:
     - family: Gilroy
       fonts:
         - asset: assets/fonts/Gilroy-Medium.ttf
+
+    - family: NeueMachina
+      fonts:
+        - asset: assets/fonts/NeueMachina-Light.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

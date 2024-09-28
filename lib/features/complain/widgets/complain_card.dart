@@ -1,6 +1,7 @@
 import 'package:civicalert/common/error_page.dart';
 import 'package:civicalert/common/loading_page.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
+import 'package:civicalert/features/complain/widgets/image_layout.dart';
 import 'package:civicalert/models/complain_model.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class ComplainCard extends ConsumerWidget {
     return ref.watch(userDetailProvider(complain.uid)).when(
           data: (user) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,42 +29,88 @@ class ComplainCard extends ConsumerWidget {
                       backgroundImage: NetworkImage(user.profilePic),
                       radius: 22,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 5),
-                            child: Text(
-                              user.name,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Mulish',
-                                fontSize: 18,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                user.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Mulish',
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 5),
-                            child: Text(
-                              timeago.format(
-                                complain.complainedAt,
-                                locale: 'en_full',
-                                allowFromNow: true,
-                              ),
-                              style: const TextStyle(
-                                color: Color.fromARGB(255, 102, 101, 101),
-                                fontSize: 13,
-                                fontFamily: 'Mulish',
+                            Container(
+                              margin: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                timeago.format(
+                                  complain.complainedAt,
+                                  locale: 'en_full',
+                                  allowFromNow: true,
+                                ),
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 102, 101, 101),
+                                  fontSize: 12,
+                                  fontFamily: 'Mulish',
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                complain.title,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Mulish',
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                complain.description,
+                                style: const TextStyle(
+                                  // fontWeight: FontWeight.w500,
+                                  fontFamily: 'Gilroy',
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            if (complain.imageLinks.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: buildImageLayout(complain.imageLinks),
+                              ),
+                          ],
+                        ),
                       ),
-                    )
+                    ),
                   ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Divider(
+                  indent: 0,
+                  height: 0,
+                  thickness: 0.5,
+                  color: Pallete.buttonColor,
                 )
               ],
             );
