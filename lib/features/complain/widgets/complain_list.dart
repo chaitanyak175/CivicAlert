@@ -21,7 +21,7 @@ class ComplainList extends ConsumerWidget {
               );
             }
             return ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+              // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
               itemCount: complains.length,
               itemBuilder: (BuildContext context, int index) {
                 final complain = complains[index];

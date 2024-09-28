@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:civicalert/apis/complain_api.dart';
 import 'package:civicalert/apis/storage_api.dart';
-import 'package:civicalert/core/failure.dart';
 import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
 import 'package:civicalert/features/complain/views/complain_successful.dart';

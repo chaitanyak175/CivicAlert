@@ -1,6 +1,5 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
-import 'package:civicalert/constants/appbar_constants.dart';
 import 'package:civicalert/constants/appwrite_constants.dart';
 import 'package:civicalert/core/failure.dart';
 import 'package:civicalert/core/providers.dart';
