@@ -12,4 +12,10 @@ class AssetsConstants {
   static const String forwardArrow = '$_iconsSvgPath/forwardArrow.svg';
   static const String backwardArrow = '$_iconsSvgPath/backwardArrow.svg';
   static const String imagePicker = '$_iconsSvgPath/imagePicker.svg';
+  static const String upvoteOutlined = '$_iconsSvgPath/upvote_outlined.svg';
+  static const String upvoteFilled = '$_iconsSvgPath/upvote_filled.svg';
+  static const String downvoteOutlined = '$_iconsSvgPath/downvote_outlined.svg';
+  static const String downvoteFilled = '$_iconsSvgPath/downvote_filled.svg';
+  static const String comment = '$_iconsSvgPath/comment.svg';
+  static const String recomplain = '$_iconsSvgPath/recomplain.svg';
 }

@@ -1,4 +1,3 @@
-import 'package:civicalert/features/home/view/home_view.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,6 +1,8 @@
 import 'package:civicalert/common/error_page.dart';
 import 'package:civicalert/common/loading_page.dart';
+import 'package:civicalert/constants/assets_constants.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
+import 'package:civicalert/features/complain/widgets/complain_icon_button.dart';
 import 'package:civicalert/features/complain/widgets/image_layout.dart';
 import 'package:civicalert/models/complain_model.dart';
 import 'package:civicalert/theme/pallete.dart';
@@ -103,6 +105,47 @@ class ComplainCard extends ConsumerWidget {
                                   padding: const EdgeInsets.only(left: 5),
                                   child: buildImageLayout(complain.imageLinks),
                                 ),
+                              const SizedBox(height: 15),
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  ComplainIconButton(
+                                    pathName: AssetsConstants.upvoteOutlined,
+                                    text: complain.upvotes.length.toString(),
+                                    height: 25,
+                                    onTap: () {},
+                                  ),
+                                  const SizedBox(
+                                    width: 40,
+                                  ),
+                                  ComplainIconButton(
+                                    pathName: AssetsConstants.downvoteOutlined,
+                                    text: complain.downvotes.length.toString(),
+                                    height: 25,
+                                    onTap: () {},
+                                  ),
+                                  const SizedBox(
+                                    width: 40,
+                                  ),
+                                  ComplainIconButton(
+                                    pathName: AssetsConstants.recomplain,
+                                    text: complain.reshareCount.toString(),
+                                    onTap: () {},
+                                    height: 27,
+                                  ),
+                                  const SizedBox(
+                                    width: 40,
+                                  ),
+                                  ComplainIconButton(
+                                    pathName: AssetsConstants.comment,
+                                    text: complain.commentIds.length.toString(),
+                                    height: 20,
+                                    onTap: () {},
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -111,7 +154,7 @@ class ComplainCard extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 25,
                 ),
                 Container(
                   margin: EdgeInsets.zero,
@@ -120,7 +163,7 @@ class ComplainCard extends ConsumerWidget {
                     indent: 0,
                     height: 0,
                     thickness: 0.5,
-                    color: Color.fromARGB(255, 157, 179, 241),
+                    color: Color.fromARGB(70, 157, 179, 241),
                   ),
                 )
               ],
