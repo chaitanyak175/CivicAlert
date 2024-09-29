@@ -117,8 +117,8 @@ class ComplainController extends StateNotifier<bool> {
     state = false;
     res.fold(
       (l) => showSnackBar(context, l.message),
-      (r) => null,
-      // (r) => Navigator.pushReplacement(context, ComplainSuccessful.route()),
+      // (r) => null,
+      (r) => Navigator.pushReplacement(context, ComplainSuccessful.route()),
     );
   }
 }

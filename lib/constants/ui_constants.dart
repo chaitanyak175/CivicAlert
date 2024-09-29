@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 class UiConstants {
   static List<Widget> bottomTabBarPages = const [
     ComplainView(),
-    ComplainSuccessful(),
-    // Text('Search Screen'),
-    AppbarBackButton(),
+    Text('notiications'),
+    // ComplainSuccessful(),
+    Text('Search Screen'),
+    // AppbarBackButton(),
     Text('Profile Page')
   ];
 }
