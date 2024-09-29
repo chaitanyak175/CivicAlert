@@ -7,14 +7,14 @@ Widget buildImageLayout(List<String> imageLinks) {
       child: Image.network(
         imageLinks[0],
         width: double.infinity,
-        height: 150,
+        height: 180,
         fit: BoxFit.cover,
       ),
     );
   } else if (imageLinks.length == 2) {
     return SizedBox(
       width: double.infinity,
-      height: 150,
+      height: 180,
       child: Row(
         children: imageLinks
             .take(2)

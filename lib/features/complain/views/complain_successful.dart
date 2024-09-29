@@ -1,3 +1,4 @@
+import 'package:civicalert/constants/appbar_constants.dart';
 import 'package:civicalert/features/complain/widgets/rate_us_on_playstore_button.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class ComplainSuccessful extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppbarConstants.createComplainSuccessfulAppbar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

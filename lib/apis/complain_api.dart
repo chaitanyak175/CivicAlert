@@ -9,17 +9,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
 final complainAPIProvider = Provider((ref) {
-  return ComplainAPI(db: ref.watch(appwriteDatabaseProvider));
+  return ComplainAPI(
+    db: ref.watch(appwriteDatabaseProvider),
+    realtime: ref.watch(appwriteRealtimeProvider),
+  );
 });
 
 abstract class IComplainAPI {
   FutureEither<Document> shareComplain(ComplainModel model);
   Future<List<Document>> getComplains();
+  Stream<RealtimeMessage> getLatestComplain();
 }
 
 class ComplainAPI implements IComplainAPI {
   final Databases _db;
-  ComplainAPI({required Databases db}) : _db = db;
+  final Realtime _realtime;
+  ComplainAPI({required Databases db, required Realtime realtime})
+      : _db = db,
+        _realtime = realtime;
 
   @override
   FutureEither<Document> shareComplain(ComplainModel complain) async {
@@ -51,7 +58,17 @@ class ComplainAPI implements IComplainAPI {
     final documents = await _db.listDocuments(
       databaseId: AppwriteConstants.databaseId,
       collectionId: AppwriteConstants.complainCollections,
+      queries: [
+        Query.orderDesc('complainedAt'),
+      ],
     );
     return documents.documents;
+  }
+
+  @override
+  Stream<RealtimeMessage> getLatestComplain() {
+    return _realtime.subscribe([
+      'databases.${AppwriteConstants.databaseId}.collections.${AppwriteConstants.complainCollections}.documents'
+    ]).stream;
   }
 }

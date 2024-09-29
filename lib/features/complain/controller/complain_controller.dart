@@ -23,6 +23,11 @@ final getComplainProvider = FutureProvider((ref) {
   return complainController.getComplains();
 });
 
+final getLatestComplain = StreamProvider.autoDispose((ref) {
+  final complainAPI = ref.watch(complainAPIProvider);
+  return complainAPI.getLatestComplain();
+});
+
 class ComplainController extends StateNotifier<bool> {
   final Ref _ref;
   final ComplainAPI _complainAPI;
@@ -112,7 +117,8 @@ class ComplainController extends StateNotifier<bool> {
     state = false;
     res.fold(
       (l) => showSnackBar(context, l.message),
-      (r) => Navigator.pushReplacement(context, ComplainSuccessful.route()),
+      (r) => null,
+      // (r) => Navigator.pushReplacement(context, ComplainSuccessful.route()),
     );
   }
 }

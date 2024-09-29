@@ -17,17 +17,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int _page = 0;
-  final appbar = AppbarConstants.appbar();
+  // final appbar = AppbarConstants.appbar();
 
   void onPageChange(int index) {
     setState(() {
       _page = index;
       HapticFeedback.heavyImpact();
     });
-  }
-
-  void onCreateComplain() {
-    Navigator.push(context, CreateComplainView.route());
   }
 
   @override
@@ -46,26 +42,13 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar,
+      // appBar: appbar,
       backgroundColor: Pallete.backgroundColor,
       body: IndexedStack(
         index: _page,
         children: UiConstants.bottomTabBarPages,
       ),
-      floatingActionButton: SizedBox(
-        height: 60,
-        width: 60,
-        child: RawMaterialButton(
-          onPressed: onCreateComplain,
-          shape: const CircleBorder(),
-          fillColor: Pallete.buttonColor,
-          child: const Icon(
-            Icons.create_outlined,
-            color: Pallete.backgroundColor,
-            size: 28,
-          ),
-        ),
-      ),
+
       bottomNavigationBar: SizedBox(
         height: 95,
         child: CupertinoTabBar(

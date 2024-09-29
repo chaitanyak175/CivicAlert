@@ -89,4 +89,62 @@ class AppbarConstants {
       centerTitle: true,
     );
   }
+
+  static AppBar complainViewAppbar() {
+    return AppBar(
+      shape: const Border(
+        bottom: BorderSide(
+          color: Pallete.selectionColor,
+          width: 0.3,
+        ),
+      ),
+      scrolledUnderElevation: 0.0,
+      backgroundColor: Pallete.backgroundColor,
+      automaticallyImplyLeading: false,
+      title: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Complaints',
+            style: TextStyle(
+              fontFamily: 'Clash',
+              fontSize: 26,
+              fontWeight: FontWeight.w500,
+              wordSpacing: 5,
+            ),
+          ),
+        ],
+      ),
+      centerTitle: true,
+    );
+  }
+
+  static AppBar createComplainSuccessfulAppbar() {
+    return AppBar(
+      shape: const Border(
+        bottom: BorderSide(
+          color: Pallete.selectionColor,
+          width: 0.3,
+        ),
+      ),
+      scrolledUnderElevation: 0.0,
+      backgroundColor: Pallete.backgroundColor,
+      automaticallyImplyLeading: false,
+      title: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Success',
+            style: TextStyle(
+              fontFamily: 'Clash',
+              fontSize: 26,
+              fontWeight: FontWeight.w500,
+              wordSpacing: 5,
+            ),
+          ),
+        ],
+      ),
+      centerTitle: true,
+    );
+  }
 }
