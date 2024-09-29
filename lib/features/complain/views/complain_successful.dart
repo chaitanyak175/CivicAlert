@@ -1,5 +1,5 @@
 import 'package:civicalert/constants/appbar_constants.dart';
-import 'package:civicalert/features/complain/widgets/rate_us_on_playstore_button.dart';
+import 'package:civicalert/features/complain/widgets/buttons/rate_us_on_playstore_button.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 

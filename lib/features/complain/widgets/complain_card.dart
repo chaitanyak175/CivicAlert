@@ -2,15 +2,17 @@ import 'package:civicalert/common/error_page.dart';
 import 'package:civicalert/common/loading_page.dart';
 import 'package:civicalert/constants/assets_constants.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
-import 'package:civicalert/features/complain/widgets/complain_icon_button.dart';
+import 'package:civicalert/features/complain/widgets/buttons/complain_icon_button.dart';
 import 'package:civicalert/features/complain/widgets/image_layout.dart';
 import 'package:civicalert/models/complain_model.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:like_button/like_button.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class ComplainCard extends ConsumerWidget {
+class ComplainCard extends ConsumerStatefulWidget {
   final ComplainModel complain;
   const ComplainCard({
     super.key,
@@ -18,8 +20,26 @@ class ComplainCard extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(userDetailProvider(complain.uid)).when(
+  ConsumerState<ConsumerStatefulWidget> createState() => _ComplainCardState();
+}
+
+class _ComplainCardState extends ConsumerState<ComplainCard> {
+  bool isUpvoted = false;
+  bool isDownvoted = false;
+
+  int upvoteCount = 0;
+  int downvoteCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    upvoteCount = widget.complain.upvotes.length;
+    downvoteCount = widget.complain.downvotes.length;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ref.watch(userDetailProvider(widget.complain.uid)).when(
           data: (user) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +80,7 @@ class ComplainCard extends ConsumerWidget {
                                 margin: const EdgeInsets.only(left: 5),
                                 child: Text(
                                   timeago.format(
-                                    complain.complainedAt,
+                                    widget.complain.complainedAt,
                                     locale: 'en_full',
                                     allowFromNow: true,
                                   ),
@@ -77,7 +97,7 @@ class ComplainCard extends ConsumerWidget {
                               Container(
                                 margin: const EdgeInsets.only(left: 5),
                                 child: Text(
-                                  complain.title,
+                                  widget.complain.title,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'Mulish',
@@ -91,7 +111,7 @@ class ComplainCard extends ConsumerWidget {
                               Container(
                                 margin: const EdgeInsets.only(left: 5),
                                 child: Text(
-                                  complain.description,
+                                  widget.complain.description,
                                   style: const TextStyle(
                                     // fontWeight: FontWeight.w500,
                                     fontFamily: 'Gilroy',
@@ -100,10 +120,11 @@ class ComplainCard extends ConsumerWidget {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              if (complain.imageLinks.isNotEmpty)
+                              if (widget.complain.imageLinks.isNotEmpty)
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
-                                  child: buildImageLayout(complain.imageLinks),
+                                  child: buildImageLayout(
+                                      widget.complain.imageLinks),
                                 ),
                               const SizedBox(height: 15),
                               Row(
@@ -111,27 +132,141 @@ class ComplainCard extends ConsumerWidget {
                                   const SizedBox(
                                     width: 5,
                                   ),
-                                  ComplainIconButton(
-                                    pathName: AssetsConstants.upvoteOutlined,
-                                    text: complain.upvotes.length.toString(),
-                                    height: 25,
-                                    onTap: () {},
+                                  LikeButton(
+                                    size: 26,
+                                    isLiked: isUpvoted,
+                                    onTap: (isLiked) async {
+                                      setState(() {
+                                        isUpvoted = !isLiked;
+                                        if (isUpvoted) {
+                                          // If user upvotes and downvote was selected, reset downvote
+                                          if (isDownvoted) {
+                                            downvoteCount--;
+                                            isDownvoted = false;
+                                          }
+                                          upvoteCount++; // Increase upvote count
+                                        } else {
+                                          upvoteCount--; // Decrease upvote count if un-upvoted
+                                        }
+                                      });
+                                      return isUpvoted;
+                                    },
+                                    likeCountAnimationDuration:
+                                        const Duration(milliseconds: 100),
+                                    likeBuilder: (isLiked) {
+                                      return isLiked
+                                          ? SvgPicture.asset(
+                                              AssetsConstants.upvoteFilled,
+                                              colorFilter:
+                                                  const ColorFilter.mode(
+                                                Pallete.buttonColor,
+                                                BlendMode.srcIn,
+                                              ),
+                                            )
+                                          : SvgPicture.asset(
+                                              AssetsConstants.upvoteOutlined,
+                                              height: 25,
+                                              colorFilter:
+                                                  const ColorFilter.mode(
+                                                      Color.fromARGB(
+                                                          255, 146, 144, 144),
+                                                      BlendMode.srcIn),
+                                            );
+                                    },
+                                    likeCount: upvoteCount,
+                                    countBuilder: (likeCount, isLiked, text) {
+                                      return Container(
+                                        margin: const EdgeInsets.all(3.0),
+                                        child: Text(
+                                          text,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: isLiked
+                                                ? Pallete.buttonColor
+                                                : const Color.fromARGB(
+                                                    255, 117, 116, 116),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                   const SizedBox(
                                     width: 40,
                                   ),
-                                  ComplainIconButton(
-                                    pathName: AssetsConstants.downvoteOutlined,
-                                    text: complain.downvotes.length.toString(),
-                                    height: 25,
-                                    onTap: () {},
+                                  SizedBox(
+                                    width: 60,
+                                    child: LikeButton(
+                                      size: 26,
+                                      isLiked: isDownvoted,
+                                      onTap: (isLiked) async {
+                                        setState(() {
+                                          isDownvoted = !isLiked;
+
+                                          if (isDownvoted) {
+                                            // If user downvotes and upvote was selected, reset upvote
+                                            if (isUpvoted) {
+                                              upvoteCount--;
+                                              isUpvoted = false;
+                                            }
+                                            downvoteCount++; // Increase downvote count
+                                          } else {
+                                            downvoteCount--; // Decrease downvote count if un-downvoted
+                                          }
+                                        });
+                                        return isDownvoted;
+                                      },
+                                      likeCountAnimationDuration:
+                                          const Duration(milliseconds: 100),
+                                      likeBuilder: (isLiked) {
+                                        return isLiked
+                                            ? SvgPicture.asset(
+                                                AssetsConstants.downvoteFilled,
+                                                colorFilter:
+                                                    const ColorFilter.mode(
+                                                  Pallete.buttonColor,
+                                                  BlendMode.srcIn,
+                                                ),
+                                              )
+                                            : SvgPicture.asset(
+                                                AssetsConstants
+                                                    .downvoteOutlined,
+                                                height: 25,
+                                                colorFilter:
+                                                    const ColorFilter.mode(
+                                                  Color.fromARGB(
+                                                      255, 146, 144, 144),
+                                                  BlendMode.srcIn,
+                                                ),
+                                              );
+                                      },
+                                      likeCount: downvoteCount,
+                                      countBuilder: (likeCount, isLiked, text) {
+                                        // Negate the likeCount to make it negative
+                                        int negativeCount =
+                                            likeCount != null ? -likeCount : 0;
+                                        return Container(
+                                          margin: const EdgeInsets.all(3.0),
+                                          child: Text(
+                                            '$negativeCount', // Display the negative count
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: isLiked
+                                                  ? Pallete.buttonColor
+                                                  : const Color.fromARGB(
+                                                      255, 117, 116, 116),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
                                   const SizedBox(
                                     width: 40,
                                   ),
                                   ComplainIconButton(
                                     pathName: AssetsConstants.recomplain,
-                                    text: complain.reshareCount.toString(),
+                                    text:
+                                        widget.complain.reshareCount.toString(),
                                     onTap: () {},
                                     height: 27,
                                   ),
@@ -140,7 +275,8 @@ class ComplainCard extends ConsumerWidget {
                                   ),
                                   ComplainIconButton(
                                     pathName: AssetsConstants.comment,
-                                    text: complain.commentIds.length.toString(),
+                                    text: widget.complain.commentIds.length
+                                        .toString(),
                                     height: 20,
                                     onTap: () {},
                                   ),

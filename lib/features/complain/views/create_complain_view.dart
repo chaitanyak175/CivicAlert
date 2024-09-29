@@ -6,7 +6,7 @@ import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
 import 'package:civicalert/features/complain/controller/complain_controller.dart';
 import 'package:civicalert/features/complain/widgets/carousel_view.dart';
-import 'package:civicalert/features/complain/widgets/create_complain_button.dart';
+import 'package:civicalert/features/complain/widgets/buttons/create_complain_button.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

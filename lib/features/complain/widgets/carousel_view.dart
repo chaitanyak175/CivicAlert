@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:civicalert/constants/assets_constants.dart';
-import 'package:civicalert/features/complain/widgets/add_more_photos_button.dart';
+import 'package:civicalert/features/complain/widgets/buttons/add_more_photos_button.dart';
 import 'package:civicalert/features/complain/widgets/custom_painter.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';
