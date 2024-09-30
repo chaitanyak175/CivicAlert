@@ -34,23 +34,29 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.theme,
-      home: ref.watch(currentUserAccountProvider).when(
-            data: (user) {
-              if (user != null) {
-                return const HomeView();
-              }
-              return const SignupView();
-            },
-            error: (error, stackTrace) {
-              return ErrorPage(
-                error: error.toString(),
-              );
-            },
-            loading: () => const LoadingPage(),
-          ),
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(
+        Colors.yellow.withOpacity(0.08),
+        BlendMode.srcATop,
+      ),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.theme,
+        home: ref.watch(currentUserAccountProvider).when(
+              data: (user) {
+                if (user != null) {
+                  return const HomeView();
+                }
+                return const SignupView();
+              },
+              error: (error, stackTrace) {
+                return ErrorPage(
+                  error: error.toString(),
+                );
+              },
+              loading: () => const LoadingPage(),
+            ),
+      ),
     );
   }
 }
