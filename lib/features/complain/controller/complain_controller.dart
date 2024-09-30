@@ -6,6 +6,7 @@ import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
 import 'package:civicalert/features/complain/views/complain_successful.dart';
 import 'package:civicalert/models/complain_model.dart';
+import 'package:civicalert/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,6 +47,30 @@ class ComplainController extends StateNotifier<bool> {
     return complainList
         .map((complainModel) => ComplainModel.fromMap(complainModel.data))
         .toList();
+  }
+
+  void upvoteComplain(ComplainModel complain, UserModel user) async {
+    List<String> upvotes = complain.upvotes;
+    if (complain.upvotes.contains(user.uid)) {
+      upvotes.remove(user.uid);
+    } else {
+      upvotes.add(user.uid);
+    }
+    complain = complain.copyWith(upvotes: upvotes);
+    final res = await _complainAPI.upvoteComplain(complain);
+    res.fold((l) => null, (r) => null);
+  }
+
+  void downvoteComplain(ComplainModel complain, UserModel user) async {
+    List<String> downvotes = complain.downvotes;
+    if (complain.downvotes.contains(user.uid)) {
+      downvotes.remove(user.uid);
+    } else {
+      downvotes.add(user.uid);
+    }
+    complain = complain.copyWith(downvotes: downvotes);
+    final res = await _complainAPI.downvoteComplain(complain);
+    res.fold((l) => null, (r) => null);
   }
 
   void shareComplain({

@@ -19,6 +19,8 @@ abstract class IComplainAPI {
   FutureEither<Document> shareComplain(ComplainModel model);
   Future<List<Document>> getComplains();
   Stream<RealtimeMessage> getLatestComplain();
+  FutureEither<Document> upvoteComplain(ComplainModel model);
+  FutureEither<Document> downvoteComplain(ComplainModel model);
 }
 
 class ComplainAPI implements IComplainAPI {
@@ -70,5 +72,59 @@ class ComplainAPI implements IComplainAPI {
     return _realtime.subscribe([
       'databases.${AppwriteConstants.databaseId}.collections.${AppwriteConstants.complainCollections}.documents'
     ]).stream;
+  }
+
+  @override
+  FutureEither<Document> upvoteComplain(ComplainModel complain) async {
+    try {
+      final document = await _db.updateDocument(
+        databaseId: AppwriteConstants.databaseId,
+        collectionId: AppwriteConstants.complainCollections,
+        documentId: complain.id,
+        data: {
+          'upvotes': complain.upvotes,
+        },
+      );
+      return right(document);
+    } on AppwriteException catch (e, stackTrace) {
+      return left(Failure(
+        e.toString(),
+        stackTrace,
+      ));
+    } catch (e, stackTrace) {
+      return left(
+        Failure(
+          e.toString(),
+          stackTrace,
+        ),
+      );
+    }
+  }
+
+  @override
+  FutureEither<Document> downvoteComplain(ComplainModel complain) async {
+    try {
+      final document = await _db.updateDocument(
+        databaseId: AppwriteConstants.databaseId,
+        collectionId: AppwriteConstants.complainCollections,
+        documentId: complain.id,
+        data: {
+          'downvotes': complain.downvotes,
+        },
+      );
+      return right(document);
+    } on AppwriteException catch (e, stackTrace) {
+      return left(Failure(
+        e.toString(),
+        stackTrace,
+      ));
+    } catch (e, stackTrace) {
+      return left(
+        Failure(
+          e.toString(),
+          stackTrace,
+        ),
+      );
+    }
   }
 }
