@@ -24,6 +24,11 @@ final getComplainProvider = FutureProvider((ref) {
   return complainController.getComplains();
 });
 
+final getComplainsByUidProvider = FutureProvider.family((ref, String uid) {
+  final complainController = ref.watch(complainControllerProvider.notifier);
+  return complainController.getComplainsByUid(uid);
+});
+
 final getLatestComplain = StreamProvider.autoDispose((ref) {
   final complainAPI = ref.watch(complainAPIProvider);
   return complainAPI.getLatestComplain();
@@ -46,6 +51,13 @@ class ComplainController extends StateNotifier<bool> {
     final complainList = await _complainAPI.getComplains();
     return complainList
         .map((complainModel) => ComplainModel.fromMap(complainModel.data))
+        .toList();
+  }
+
+  Future<List<ComplainModel>> getComplainsByUid(String uid) async {
+    final complainList = await _complainAPI.getComplainsByUid(uid);
+    return complainList
+        .map((document) => ComplainModel.fromMap(document.data))
         .toList();
   }
 

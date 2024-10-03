@@ -18,6 +18,7 @@ final complainAPIProvider = Provider((ref) {
 abstract class IComplainAPI {
   FutureEither<Document> shareComplain(ComplainModel model);
   Future<List<Document>> getComplains();
+  Future<List<Document>> getComplainsByUid(String uid);
   Stream<RealtimeMessage> getLatestComplain();
   FutureEither<Document> upvoteComplain(ComplainModel model);
   FutureEither<Document> downvoteComplain(ComplainModel model);
@@ -61,6 +62,19 @@ class ComplainAPI implements IComplainAPI {
       databaseId: AppwriteConstants.databaseId,
       collectionId: AppwriteConstants.complainCollections,
       queries: [
+        Query.orderDesc('complainedAt'),
+      ],
+    );
+    return documents.documents;
+  }
+
+  @override
+  Future<List<Document>> getComplainsByUid(String uid) async {
+    final documents = await _db.listDocuments(
+      databaseId: AppwriteConstants.databaseId,
+      collectionId: AppwriteConstants.complainCollections,
+      queries: [
+        Query.equal('uid', uid),
         Query.orderDesc('complainedAt'),
       ],
     );
