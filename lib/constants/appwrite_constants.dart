@@ -5,6 +5,7 @@ class AppwriteConstants {
 
   static const String userCollections = '66ed9cdd00310fbefcd7';
   static const String complainCollections = '66f3e087001b34eef8b9';
+  static const String commentsCollections = '66fd60ab002f4d90ef5c';
 
   static const String imagesBucket = '66f402b7001ee5e848fa';
 

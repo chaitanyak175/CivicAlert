@@ -1,6 +1,7 @@
 class AssetsConstants {
   static const String _imagesSvgPath = 'assets/images';
   static const String appLogo = '$_imagesSvgPath/appLogo.svg';
+  static const String profilePic = '$_imagesSvgPath/profilePic.png';
 
   static const String _iconsSvgPath = 'assets/icons';
 
@@ -18,4 +19,5 @@ class AssetsConstants {
   static const String downvoteFilled = '$_iconsSvgPath/downvote_filled.svg';
   static const String comment = '$_iconsSvgPath/comment.svg';
   static const String recomplain = '$_iconsSvgPath/recomplain.svg';
+  static const String views = '$_iconsSvgPath/views.svg';
 }
