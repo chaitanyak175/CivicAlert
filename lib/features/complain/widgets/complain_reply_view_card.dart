@@ -7,6 +7,7 @@ import 'package:civicalert/features/complain/controller/comment_controller.dart'
 import 'package:civicalert/features/complain/controller/complain_controller.dart';
 import 'package:civicalert/features/complain/widgets/buttons/comment_button.dart';
 import 'package:civicalert/features/complain/widgets/buttons/complain_icon_button.dart';
+import 'package:civicalert/features/complain/widgets/carousel_image_complaint_reply.dart';
 import 'package:civicalert/features/complain/widgets/image_layout.dart';
 import 'package:civicalert/models/complain_model.dart';
 import 'package:civicalert/theme/pallete.dart';
@@ -242,12 +243,34 @@ class _ComplainReplyViewCardState extends ConsumerState<ComplainReplyViewCard> {
                                 ),
                               ),
                             ),
+                          const SizedBox(height: 25),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Images Uploaded :',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Gilroy',
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 10),
                           if (widget.complain.imageLinks.isNotEmpty)
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
-                              child:
-                                  buildImageLayout(widget.complain.imageLinks),
+                              child: Container(
+                                height: 280,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Colors.grey),
+                                ),
+                                child: CarouselImage(
+                                    imageLinks: widget.complain.imageLinks),
+                              ),
                             ),
                           const SizedBox(height: 15),
                           Row(

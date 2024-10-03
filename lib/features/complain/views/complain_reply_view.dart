@@ -43,6 +43,9 @@ class ComplainReplyView extends ConsumerWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               CommentList(complainId: complain.id),
             ],
           ),
