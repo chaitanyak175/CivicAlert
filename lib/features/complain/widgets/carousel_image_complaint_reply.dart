@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:civicalert/features/complain/widgets/full_screen_image_viewer.dart';
 import 'package:flutter/material.dart';

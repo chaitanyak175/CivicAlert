@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 Widget buildImageLayout(List<String> imageLinks) {
+  Widget shimmerWidget() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        color: Colors.white,
+        width: double.infinity,
+        height: double.infinity,
+      ),
+    );
+  }
+
   if (imageLinks.length == 1) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
@@ -9,6 +22,14 @@ Widget buildImageLayout(List<String> imageLinks) {
         width: double.infinity,
         height: 180,
         fit: BoxFit.cover,
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          } else {
+            return shimmerWidget();
+          }
+        },
       ),
     );
   } else if (imageLinks.length == 2) {
@@ -28,6 +49,14 @@ Widget buildImageLayout(List<String> imageLinks) {
                       imageUrl,
                       height: 150,
                       fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        } else {
+                          return shimmerWidget();
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -42,13 +71,20 @@ Widget buildImageLayout(List<String> imageLinks) {
       child: Row(
         children: [
           Expanded(
-            // flex: 2,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
                 imageLinks[0],
                 height: double.infinity,
                 fit: BoxFit.cover,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return shimmerWidget();
+                  }
+                },
               ),
             ),
           ),
@@ -56,7 +92,6 @@ Widget buildImageLayout(List<String> imageLinks) {
             width: 7,
           ),
           Expanded(
-            // flex: 1,
             child: Column(
               children: [
                 Expanded(
@@ -67,6 +102,14 @@ Widget buildImageLayout(List<String> imageLinks) {
                       child: Image.network(
                         imageLinks[1],
                         fit: BoxFit.cover,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return shimmerWidget();
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -82,6 +125,14 @@ Widget buildImageLayout(List<String> imageLinks) {
                       child: Image.network(
                         imageLinks[2],
                         fit: BoxFit.cover,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return shimmerWidget();
+                          }
+                        },
                       ),
                     ),
                   ),
