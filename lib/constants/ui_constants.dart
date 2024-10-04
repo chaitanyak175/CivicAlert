@@ -1,3 +1,4 @@
+import 'package:civicalert/common/shimmer.dart';
 import 'package:civicalert/features/complain/views/complain_view.dart';
 import 'package:civicalert/features/myComplains/view/my_complaints_view.dart';
 import 'package:civicalert/features/myComplains/widgets/my_complains_list.dart';
@@ -9,8 +10,8 @@ class UiConstants {
 
     MyComplaintsView(),
     // Text('notiications'),
-    // ComplainSuccessful(),
-    Text('Search Screen'),
+    ShimmerConstant(),
+    // Text('Search Screen'),
     // AppbarBackButton(),
     Text('Profile Page')
   ];

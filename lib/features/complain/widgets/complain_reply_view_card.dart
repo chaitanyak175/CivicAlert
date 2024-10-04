@@ -8,7 +8,6 @@ import 'package:civicalert/features/complain/controller/complain_controller.dart
 import 'package:civicalert/features/complain/widgets/buttons/comment_button.dart';
 import 'package:civicalert/features/complain/widgets/buttons/complain_icon_button.dart';
 import 'package:civicalert/features/complain/widgets/carousel_image_complaint_reply.dart';
-import 'package:civicalert/features/complain/widgets/image_layout.dart';
 import 'package:civicalert/models/complain_model.dart';
 import 'package:civicalert/theme/pallete.dart';
 import 'package:flutter/material.dart';

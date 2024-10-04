@@ -1,5 +1,6 @@
 import 'package:civicalert/common/error_page.dart';
 import 'package:civicalert/common/loading_page.dart';
+import 'package:civicalert/common/shimmer.dart';
 import 'package:civicalert/constants/assets_constants.dart';
 import 'package:civicalert/features/auth/controller/auth_controller.dart';
 import 'package:civicalert/features/complain/controller/comment_controller.dart';
@@ -61,7 +62,7 @@ class _ComplainCardState extends ConsumerState<ComplainCard> {
     final isLoading = ref.watch(commentControllerProvider);
 
     return currentUser == null
-        ? const Loader()
+        ? const ShimmerConstant()
         : ref.watch(userDetailProvider(widget.complain.uid)).when(
               data: (user) {
                 return GestureDetector(
