@@ -1,14 +1,17 @@
 # CivicAlert
 
-CivicAlert is a mobile app that allows users to submit and upvote complaints, which are then sent to the government if they receive more than 5 upvotes.
+CivicAlert is a mobile app built with Flutter that empowers users to report and upvote complaints about local issues. If a complaint reaches five or more upvotes, it is automatically forwarded to the appropriate government authorities, increasing the likelihood of action on community concerns. By leveraging Appwrite for backend services and a Python script for automated email notifications, CivicAlert ensures that community voices are amplified effectively.
 
 ## Features
 
-- Users can create and submit complaints with a title and description.
-- Complaints are displayed in a community feed, sorted by the number of upvotes.
-- Users can upvote complaints they agree with.
-- Complaints with more than 5 upvotes are automatically sent to the government.
-- Users can view a list of their own submitted complaints.
+1. User-Generated Complaints: Users can submit complaints with relevant details (title, description, location, images).
+2. Community Feed: Complaints are displayed in a feed view, ordered by upvotes, allowing users to support issues they care about.
+3. Automated Government Notification: A Python script, deployed on a server, continuously monitors the Appwrite database for changes in upvotes. When a complaint reaches five upvotes, it triggers an automated email notification to the government, ensuring timely awareness of popular community concerns.
+4. Personal Complaint Management: Users can track and view complaints they’ve submitted, monitoring issue progress and public support.
+
+## Architecture
+
+CivicAlert uses the Model-View-Controller (MVC) architecture to maintain clean and
 
 ## File Structure
 
