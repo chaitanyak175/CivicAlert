@@ -18,6 +18,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:badges/badges.dart' as badges;
 
 class ComplainReplyViewCard extends ConsumerStatefulWidget {
   static route(ComplainModel complain) => MaterialPageRoute(
@@ -98,10 +99,62 @@ class _ComplainReplyViewCardState extends ConsumerState<ComplainReplyViewCard> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(user.profilePic),
-                            radius: 22,
-                          ),
+                          user.isVerified
+                              ? Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Pallete.buttonColor
+                                                .withOpacity(0.7),
+                                            Pallete.buttonColor
+                                                .withOpacity(0.9),
+                                            Pallete.buttonColor,
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 46,
+                                      height: 46,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    badges.Badge(
+                                      badgeContent: const Icon(
+                                        Icons.check,
+                                        size: 12,
+                                        color: Colors.white,
+                                      ),
+                                      badgeStyle: const badges.BadgeStyle(
+                                        shape: badges.BadgeShape.twitter,
+                                        badgeColor: Pallete.buttonColor,
+                                        padding: EdgeInsets.all(6),
+                                      ),
+                                      position: badges.BadgePosition.topEnd(
+                                          top: -6, end: -3),
+                                      child: CircleAvatar(
+                                        backgroundImage:
+                                            NetworkImage(user.profilePic),
+                                        radius: 22,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(user.profilePic),
+                                  radius: 22,
+                                ),
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.only(left: 10),

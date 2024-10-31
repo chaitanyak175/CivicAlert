@@ -22,6 +22,7 @@ abstract class IAuthApi {
     required String password,
   });
   Future<model.User?> currentUserAccount();
+  FutureEitherVoid logout();
 }
 
 class AuthApi extends IAuthApi {
@@ -103,6 +104,34 @@ class AuthApi extends IAuthApi {
     } catch (e) {
       logger.e("Unexpected error: $e");
       return null;
+    }
+  }
+
+  @override
+  FutureEitherVoid logout() async {
+    try {
+      await _account.deleteSession(sessionId: 'current');
+      return right(null);
+    } on AppwriteException catch (e, stackTrace) {
+      String message = 'Something went wrong';
+      if (e.code == 409) {
+        message = 'Email already exists';
+      } else if (e.code == 400) {
+        message = 'Invalid email or password format';
+      }
+      return left(
+        Failure(
+          message,
+          stackTrace,
+        ),
+      );
+    } catch (e, stackTrace) {
+      return left(
+        Failure(
+          e.toString(),
+          stackTrace,
+        ),
+      );
     }
   }
 }

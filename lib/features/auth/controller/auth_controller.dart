@@ -2,6 +2,7 @@ import 'package:civicalert/apis/auth_api.dart';
 import 'package:civicalert/apis/user_api.dart';
 import 'package:civicalert/core/utils.dart';
 import 'package:civicalert/features/auth/view/login_view.dart';
+import 'package:civicalert/features/auth/view/signup_view.dart';
 import 'package:civicalert/features/home/view/home_view.dart';
 import 'package:civicalert/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -136,5 +137,17 @@ class AuthController extends StateNotifier<bool> {
     logger.i('document for current user found!');
     final updatedUser = UserModel.fromMap(document.data);
     return updatedUser;
+  }
+
+  void logout(BuildContext context) async {
+    final res = await _authAPI.logout();
+    res.fold(
+      (l) => null,
+      (r) => Navigator.pushAndRemoveUntil(
+        context,
+        SignupView.route(),
+        (route) => false,
+      ),
+    );
   }
 }

@@ -20,4 +20,5 @@ class AssetsConstants {
   static const String comment = '$_iconsSvgPath/comment.svg';
   static const String recomplain = '$_iconsSvgPath/recomplain.svg';
   static const String views = '$_iconsSvgPath/views.svg';
+  static const String defaultProfile = '$_iconsSvgPath/defaultProfile.svg';
 }
