@@ -4,14 +4,35 @@ CivicAlert is a mobile app built with Flutter that empowers users to report and 
 
 ## Features
 
-1. User-Generated Complaints: Users can submit complaints with relevant details (title, description, location, images).
-2. Community Feed: Complaints are displayed in a feed view, ordered by upvotes, allowing users to support issues they care about.
-3. Automated Government Notification: A Python script, deployed on a server, continuously monitors the Appwrite database for changes in upvotes. When a complaint reaches five upvotes, it triggers an automated email notification to the government, ensuring timely awareness of popular community concerns.
-4. Personal Complaint Management: Users can track and view complaints they’ve submitted, monitoring issue progress and public support.
+1. **User-Generated Complaints**: Users can submit complaints with relevant details (title, description, location, images).
+2. **Community Feed**: Complaints are displayed in a feed view, ordered by upvotes, allowing users to support issues they care about.
+3. **Automated Government Notification**: A Python script, deployed on a server, continuously monitors the Appwrite database for changes in upvotes. When a complaint reaches five upvotes, it triggers an automated email notification to the government, ensuring timely awareness of popular community concerns.
+4. **Personal Complaint Management**: Users can track and view complaints they’ve submitted, monitoring issue progress and public support.
+
+---
+
+### Python Script for Automated Notification
+
+The Python script responsible for monitoring upvotes and sending automated email notifications to government authorities can be found [here](https://github.com/ShreyasGandhi0607/complaintsApp).
+
+### Demo Video
+
+A video demonstrating the app's features is available [here](https://www.youtube.com/watch?v=7eY1qOHjuUA).
+
+---
+
+## Screenshots
+
+![Screenshot 1](https://imgur.com/XzVEoKX.jpg)
+![Screenshot 2](https://imgur.com/OqDHk8k.jpg)
+![Screenshot 3](https://imgur.com/8P3L4mo.jpg)
+![Screenshot 4](https://imgur.com/iAm3msy.jpg)
+![Screenshot 5](https://imgur.com/FO6yMLW.jpg)
+![Screenshot 6](https://imgur.com/5U2XMOK.jpg)
 
 ## Architecture
 
-CivicAlert uses the Model-View-Controller (MVC) architecture to maintain clean and
+CivicAlert uses the Model-View-Controller (MVC) architecture to maintain clean and organized code structure.
 
 ## File Structure
 
