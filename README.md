@@ -23,12 +23,17 @@ A video demonstrating the app's features is available [here](https://www.youtube
 
 ## Screenshots
 
-![Screenshot 1](https://imgur.com/XzVEoKX.jpg)
-![Screenshot 2](https://imgur.com/OqDHk8k.jpg)
-![Screenshot 3](https://imgur.com/8P3L4mo.jpg)
-![Screenshot 4](https://imgur.com/iAm3msy.jpg)
-![Screenshot 5](https://imgur.com/FO6yMLW.jpg)
-![Screenshot 6](https://imgur.com/5U2XMOK.jpg)
+<p align="center">
+  <img src="https://imgur.com/XzVEoKX.jpg" alt="Screenshot 1" width="30%">
+  <img src="https://imgur.com/OqDHk8k.jpg" alt="Screenshot 2" width="30%">
+  <img src="https://imgur.com/8P3L4mo.jpg" alt="Screenshot 3" width="30%">
+</p>
+
+<p align="center">
+  <img src="https://imgur.com/iAm3msy.jpg" alt="Screenshot 4" width="30%">
+  <img src="https://imgur.com/FO6yMLW.jpg" alt="Screenshot 5" width="30%">
+  <img src="https://imgur.com/5U2XMOK.jpg" alt="Screenshot 6" width="30%">
+</p>
 
 ## Architecture
 
